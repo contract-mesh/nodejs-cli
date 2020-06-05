@@ -42,12 +42,14 @@ async function getModule(ref, resourceType) {
   var module;
 
   if (found) {
+    // built-in extension
     try {
       module = require(moduleName);
     } catch (error) {
       throw `Unable to find built-in extension referenced by ${ref}`;
     }
   } else {
+    // packaged extension
     try {
       if (!pluginManager.alreadyInstalled(moduleName)) {
         await pluginManager.install(moduleName);

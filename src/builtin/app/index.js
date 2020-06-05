@@ -9,7 +9,7 @@ async function validate(project, context) {
       for (var i = 0; i < featureKeys.length; i++) {
         const featureKey = featureKeys[i];
 
-        const featureResults = await context.validateObject('feature', featureKey, project.features[featureKey], `$.features.['${featureKey}']`);
+        const featureResults = await context.validateObject('features', featureKey, project.features[featureKey], `$.features.['${featureKey}']`);
 
         results = results.concat(featureResults);
       }
@@ -32,7 +32,7 @@ async function validate(project, context) {
   return results;
 }
 
-module.exports.project = {
+module.exports.projects = {
   default: {
     validate: validate
   }

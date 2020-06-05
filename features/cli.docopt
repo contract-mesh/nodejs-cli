@@ -3,5 +3,6 @@ The CLI interface for Contract Mesh, which allows the developer to perform all l
 Usage:
     contract validate
     contract render
+    contract codegen
     contract version
     contract help

@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('fs');
 const neodoc = require('neodoc');
-const validation = require('./validation.js');
+const validation = require('./src/validation.js');
 
 const docoptPath = `${__dirname}/features/cli.docopt`;
 

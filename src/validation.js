@@ -22,7 +22,7 @@ async function validate() {
 
   const context = new Context();
 
-  const validationResult = await context.validateObject('project', project.type, project);
+  const validationResult = await context.validateObject('projects', project.type, project);
 
   if (validationResult.length > 0) {
     throw validationResult;

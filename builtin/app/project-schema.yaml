@@ -1,0 +1,8 @@
+type: object
+properties:
+  features:
+    description: A map of features that this app implements. The keys are feature types. The values are feature contracts unique to each feature type.
+    type: object
+  dependencies:
+    description: A map of feature dependencies that this app has on other contracts
+    type: object

@@ -1,0 +1,29 @@
+{
+  "name": "contractmesh-cli",
+  "version": "1.0.0",
+  "description": "CLI interface for Contract Mesh",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/contract-mesh/nodejs-cli.git"
+  },
+  "author": "Tony Chow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/contract-mesh/nodejs-cli/issues"
+  },
+  "homepage": "https://github.com/contract-mesh/nodejs-cli#readme",
+  "dependencies": {
+    "jsonpath": "^1.0.2",
+    "jsonschema": "^1.2.6",
+    "linq": "^3.2.2",
+    "live-plugin-manager": "^0.14.1",
+    "neodoc": "^2.0.2",
+    "promise-fs": "^2.1.1",
+    "yaml": "^1.10.0",
+    "yaml-schema-validator": "^1.2.2"
+  }
+}

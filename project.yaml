@@ -1,0 +1,5 @@
+type: app
+features:
+  cli:
+    $contract-ref: ./features/cli.docopt
+

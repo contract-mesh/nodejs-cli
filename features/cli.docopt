@@ -1,0 +1,7 @@
+The CLI interface for Contract Mesh, which allows the developer to perform all local operations with contracts
+
+Usage:
+    contract validate
+    contract render
+    contract version
+    contract help

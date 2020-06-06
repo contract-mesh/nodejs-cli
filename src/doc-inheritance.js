@@ -1,3 +1,4 @@
+'use strict';
 const extensibility = require('./extensibility');
 const yaml = require('yaml');
 const jp = require('jsonpath');
@@ -10,7 +11,7 @@ async function expand(obj) {
 
   const nodes = jp.nodes(obj, '$..*');
 
-  for (i = 0; i < nodes.length; i++) {
+  for (var i = 0; i < nodes.length; i++) {
     const node = nodes[i];
     const property = node.path.pop();
 

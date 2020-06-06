@@ -1,5 +1,17 @@
 type: app
+info:
+  name: contract-mesh/cli-tool
 features:
   cli:
-    $contract-ref: ./features/cli.docopt
-
+    root:
+      $contract-ref: ./contracts/root.docopt
+    validate:
+      $contract-ref: ./contracts/validate.docopt
+    render:
+      $contract-ref: ./contracts/render.docopt
+    codegen:
+      $contract-ref: ./contracts/codegen.docopt
+dependencies:
+  contract-mesh/api:
+    openapi:
+      - GET /v1/entities

@@ -1,3 +1,4 @@
+'use strict';
 const fs = require('promise-fs');
 const PluginManager = require('live-plugin-manager').PluginManager;
 

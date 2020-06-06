@@ -17,13 +17,14 @@
   },
   "homepage": "https://github.com/contract-mesh/nodejs-cli#readme",
   "dependencies": {
+    "cli-highlight": "^2.1.4",
+    "colors": "^1.4.0",
     "jsonpath": "^1.0.2",
     "jsonschema": "^1.2.6",
     "linq": "^3.2.2",
     "live-plugin-manager": "^0.14.1",
     "neodoc": "^2.0.2",
     "promise-fs": "^2.1.1",
-    "yaml": "^1.10.0",
-    "yaml-schema-validator": "^1.2.2"
+    "yaml": "^1.10.0"
   }
 }

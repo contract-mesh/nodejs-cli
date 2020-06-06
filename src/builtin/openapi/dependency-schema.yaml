@@ -1,0 +1,17 @@
+anyOf:
+  - type: array
+    description: |
+      An array of REST endpoints to depend on. Each item uniquely identifies an endpoint
+      in one of the OpenAPI specs defined by the dependency service. This identifier
+      could either be the operation ID of the endpoint, or the 'METHOD /path/to/resource'
+      combination that uniquely identifies the endpoint.
+    items:
+      type: string
+  - type: object
+    description: |
+      A map of REST endpoints to depend on. Each key uniquely identifies an endpoint
+      in one of the OpenAPI specs defined by the dependency service. This identifier
+      could either be the operation ID of the endpoint, or the 'METHOD /path/to/resource'
+      combination that uniquely identifies the endpoint. The value is currently null.
+    additionalProperties:
+      type: object

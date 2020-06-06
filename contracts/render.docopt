@@ -1,0 +1,6 @@
+Renders the current project.yaml, resolving all references and base contracts into a single contract document
+
+usage: contract render [options]
+
+options:
+  -f <format>, --format <format>  The output format.

@@ -1,0 +1,18 @@
+type: object
+description: |
+  A map of OpenAPI specifications implemented by this service.
+  Keys are arbitrary. Values are standard OpenAPI specs.
+additionalProperties:
+  anyOf:
+    - type: object
+      properties:
+        openapi:
+          type: string
+      required:
+        - openapi
+    - type: object
+      properties:
+        swagger:
+          type: string
+      required:
+        - swagger

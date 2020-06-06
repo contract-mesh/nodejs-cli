@@ -1,0 +1,9 @@
+The CLI interface for Contract Mesh, which allows the developer to perform all local operations with contracts
+
+usage: contract [<command> [<args>]...]
+
+The most commonly used contract commands are:
+
+    validate    Validates the current project.yaml
+    render      Venders the current project.yaml, resolving all references and base contracts into a single contract document
+    codegen     Generates code from the current project.yaml

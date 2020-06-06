@@ -9,7 +9,11 @@ async function validate(project, context) {
       for (var i = 0; i < featureKeys.length; i++) {
         const featureKey = featureKeys[i];
 
-        const featureResults = await context.validateObject('features', featureKey, project.features[featureKey], `$.features.['${featureKey}']`);
+        const featureResults = await context.validateObject(
+          'features',
+          featureKey,
+          project.features[featureKey],
+          `$.features.['${featureKey}']`);
 
         results = results.concat(featureResults);
       }
@@ -17,14 +21,32 @@ async function validate(project, context) {
 
     // dependencies
     if (project.dependencies) {
-      const dependencyKeys = Object.keys(project.dependencies);
+      const projectNames = Object.keys(project.dependencies);
 
-      for (var i = 0; i < dependencyKeys.length; i++) {
-        const dependencyKey = dependencyKeys[i];
+      for (var i = 0; i < projectNames.length; i++) {
+        const projectName = projectNames[i];
 
-        const dependencyResults = await context.validateObject('dependency', dependencyKey, project.dependencies[dependencyKey], `$.dependencies.['${dependencyKey}']`);
+        if (!(await context.getProject(projectName))) {
+          results = results.concat([
+            {
+              path: `$.dependencies.['${projectName}']`,
+              message: 'Project not found'
+            }
+          ]);
+        } else {
+          const featureDependencies = project.dependencies[projectName];
 
-        results = results.concat(dependencyResults);
+          const featureNames = Object.keys(featureDependencies);
+
+          for (var j = 0; j < featureNames.length; j++) {
+            const featureName = featureNames[j];
+            const featureDependency = featureDependencies[featureName];
+
+            const featureResults = await context.validateObject('dependency', featureName, featureDependency, `$.dependencies.['${projectName}'].['${featureName}']`);
+
+            results = results.concat(featureResults);
+          }
+        }
       }
     }
   }

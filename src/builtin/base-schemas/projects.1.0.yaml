@@ -1,0 +1,24 @@
+type: object
+properties:
+  type:
+    type: string
+  info:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Kabob-cased name for the project. May have multiple levels separated by slashes.
+        pattern: ^(?:[a-z0-9]+(?:-[a-z0-9]+)*)(?:/[a-z0-9]+(?:-[a-z0-9]+)*)*$
+      icon:
+        type: string
+        description: URL pointing to an icon that represents this project.
+        format: uri
+      org:
+        type: string
+        description: Kabob-cased organization that owns the project. May have multiple levels separated by slashes.
+        pattern: ^(?:[a-z0-9]+(?:-[a-z0-9]+)*)(?:/[a-z0-9]+(?:-[a-z0-9]+)*)*$
+    required:
+      - name
+required:
+  - type
+  - info

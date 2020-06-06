@@ -1,0 +1,3 @@
+Generates code from the current project.yaml, if supported by the project type and configured
+
+usage: contract codegen

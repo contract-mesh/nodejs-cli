@@ -14,9 +14,9 @@ const pluginManager = new PluginManager({cwd:'./.contractmesh'});
 async function getModule(ref, resourceType) {
   const shorthandRefResult = ref.match(/^\s*(?<module>[-\w]+)\s*$/);
 
-  var moduleName;
-  var resourceName;
-  var found = false;
+  let moduleName;
+  let resourceName;
+  let found = false;
 
   if (shorthandRefResult) {
     resourceName = 'default'
@@ -40,7 +40,7 @@ async function getModule(ref, resourceType) {
     }
   }
 
-  var module;
+  let module;
 
   if (found) {
     // built-in extension

@@ -11,7 +11,7 @@ async function expand(obj) {
 
   const nodes = jp.nodes(obj, '$..*');
 
-  for (var i = 0; i < nodes.length; i++) {
+  for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i];
     const property = node.path.pop();
 
@@ -42,8 +42,8 @@ async function expand(obj) {
 }
 
 async function getReplacement(ref) {
-  var contents;
-  var fileExtension;
+  let contents;
+  let fileExtension;
 
   // TODO: support # notation
 

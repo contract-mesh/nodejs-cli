@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('promise-fs');
 const neodoc = require('neodoc');
-const Context = require(`${__dirname}/context.js`);
+const Context = require('./context.js');
 const console = require('console');
 const highlight = require('cli-highlight').highlight;
 
@@ -29,7 +29,7 @@ async function run(commandName, context = null, argv = null) {
     // execute command
     const commandScriptPath = `${__dirname}/commands/${commandName}.js`;
 
-    var commandScriptFound = true;
+    let commandScriptFound = true;
 
     try {
       await fs.access(commandScriptPath);
@@ -53,12 +53,12 @@ async function run(commandName, context = null, argv = null) {
 }
 
 function outputObject(obj, args) {
-  var format = args['-f'];
+  let format = args['-f'];
   if (!format) {
     format = 'yaml';
   }
 
-  var text;
+  let text;
 
   switch (format) {
     case 'json':

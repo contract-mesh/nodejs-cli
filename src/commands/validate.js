@@ -1,6 +1,6 @@
 'use strict';
 const console = require('console');
-const cli = require(`${__dirname}/../cli.js`);
+const cli = require('./../cli.js');
 
 require('colors');
 
@@ -9,7 +9,7 @@ module.exports.run = async function(args, context) {
     throw `project does not have a type property`;
   }
 
-  var results;
+  let results;
 
   try {
     results = await context.validateObject('projects', context.project.type, context.project);

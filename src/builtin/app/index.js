@@ -1,12 +1,12 @@
 async function validate(project, context) {
-  var results = await context.validateSchema(project, `${__dirname}/project-schema.yaml`);
+  let results = await context.validateSchema(project, `${__dirname}/project-schema.yaml`);
 
   if (results.length === 0) {
     // features
     if (project.features) {
       const featureKeys = Object.keys(project.features);
 
-      for (var i = 0; i < featureKeys.length; i++) {
+      for (let i = 0; i < featureKeys.length; i++) {
         const featureKey = featureKeys[i];
 
         const featureResults = await context.validateObject(
@@ -23,10 +23,11 @@ async function validate(project, context) {
     if (project.dependencies) {
       const projectNames = Object.keys(project.dependencies);
 
-      for (var i = 0; i < projectNames.length; i++) {
+      for (let i = 0; i < projectNames.length; i++) {
         const projectName = projectNames[i];
+        const dependencyProject = await context.getProject(projectName);
 
-        if (!(await context.getProject(projectName))) {
+        if (dependencyProject == null) {
           results = results.concat([
             {
               path: `$.dependencies.['${projectName}']`,
@@ -38,11 +39,11 @@ async function validate(project, context) {
 
           const featureNames = Object.keys(featureDependencies);
 
-          for (var j = 0; j < featureNames.length; j++) {
+          for (let j = 0; j < featureNames.length; j++) {
             const featureName = featureNames[j];
             const featureDependency = featureDependencies[featureName];
 
-            const featureResults = await context.validateObject('dependency', featureName, featureDependency, `$.dependencies.['${projectName}'].['${featureName}']`);
+            const featureResults = await context.validateObject('dependencies', featureName, featureDependency, `$.dependencies.['${projectName}'].['${featureName}']`);
 
             results = results.concat(featureResults);
           }

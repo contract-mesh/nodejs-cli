@@ -1,11 +1,11 @@
 'use strict';
 const fs = require('promise-fs');
 const JsonSchemaValidator = require('jsonschema').Validator
-const extensibility = require(`${__dirname}/extensibility.js`);
+const extensibility = require('./extensibility.js');
 const yaml = require('yaml');
 const Enumerable = require('linq');
-const parsing = require(`${__dirname}/parsing.js`);
-const catalog = require(`${__dirname}/catalog.js`);
+const parsing = require('./parsing.js');
+const catalog = require('./catalog.js');
 
 function Context(projectPath, project, jsonPath = null) {
   this.projectPath = projectPath;
@@ -24,19 +24,26 @@ function Context(projectPath, project, jsonPath = null) {
     }
   };
 
-  this.validateObject = async function(category, type, obj, jsonPath = null) {
-    const context = jsonPath ? new Context(this.projectPath, this.project, jsonPath) : this;
+  this.validateObject = async function(category, type, obj, jsonPath = '$') {
+    const context = jsonPath || jsonPath == this.jsonPath
+      ? new Context(this.projectPath, this.project, jsonPath)
+      : this;
 
-    var version = null;
+    let version = null;
     if (obj.contractmesh) {
       version = obj.contractmesh;
+      if (typeof(version) === 'number') {
+        version = `${version}.0`;
+      }
     }
 
     // base schema
     try {
+      const schemaPath = `${__dirname}/builtin/base-schemas/${category}${version ? '.' + version : ''}.yaml`;
+
       const baseSchemaResults = await this.validateSchema(
         obj,
-        `${__dirname}/builtin/base-schemas/${category}${version ? '.' + version : ''}.yaml`,
+        schemaPath,
         context);
 
       if (baseSchemaResults.length > 0) {
@@ -46,7 +53,7 @@ function Context(projectPath, project, jsonPath = null) {
       // base schema does not exist
     }
 
-    var module;
+    let module;
 
     try {
       module = await extensibility.getExtension(type, category);
@@ -68,9 +75,9 @@ function Context(projectPath, project, jsonPath = null) {
 
     const validator = new JsonSchemaValidator();
 
-    var validationResults = validator.validate(obj, schema);
+    let validationResults = validator.validate(obj, schema);
 
-    var result = Enumerable.from(validationResults.errors).select(e => {
+    let result = Enumerable.from(validationResults.errors).select(e => {
       return {
         path: e.property.replace(/^(?:\$|instance)(?=\.|$)/, this.jsonPath),
         message: e.message

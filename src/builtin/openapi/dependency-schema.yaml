@@ -14,4 +14,4 @@ anyOf:
       could either be the operation ID of the endpoint, or the 'METHOD /path/to/resource'
       combination that uniquely identifies the endpoint. The value is currently null.
     additionalProperties:
-      type: object
+      type: null

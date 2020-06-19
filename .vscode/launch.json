@@ -11,8 +11,10 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}\\index.js",
-      "args": ["validate", "-f", "yaml"]
+      "program": "${workspaceFolder}/index.ts",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "args": ["validate", "-f", "yaml"],
+      "outFiles": ["${workspaceFolder}/**/*.js"]
     }
   ]
 }

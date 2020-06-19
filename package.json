@@ -26,5 +26,8 @@
     "neodoc": "^2.0.2",
     "promise-fs": "^2.1.1",
     "yaml": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/yaml": "^1.9.7"
   }
 }

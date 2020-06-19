@@ -1,0 +1,11 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "ES5",
+    "sourceMap": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "index.ts"
+  ]
+}

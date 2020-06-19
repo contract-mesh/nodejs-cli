@@ -9,7 +9,7 @@ const PluginManager = require('live-plugin-manager').PluginManager;
 //   }
 // });
 
-const pluginManager = new PluginManager({cwd:'./.contractmesh'});
+const pluginManager = new PluginManager({cwd:'./.contractmesh',pluginsPath:'./node_modules'});
 
 async function getModule(ref, resourceType) {
   const shorthandRefResult = ref.match(/^\s*(?<module>[-\w]+)\s*$/);
@@ -53,7 +53,7 @@ async function getModule(ref, resourceType) {
     // packaged extension
     try {
       if (!pluginManager.alreadyInstalled(moduleName)) {
-        await pluginManager.install(moduleName);
+        let info = await pluginManager.install(moduleName);
       }
       module = pluginManager.require(moduleName);
     } catch (error) {

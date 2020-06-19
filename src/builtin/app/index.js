@@ -1,27 +1,25 @@
-async function validate(project, context) {
-  let results = await context.validateSchema(project, `${__dirname}/project-schema.yaml`);
+async function validate(context) {
+  let results = await context.validateSchema(`${__dirname}/project-schema.yaml`);
 
   if (results.length === 0) {
     // features
-    if (project.features) {
-      const featureKeys = Object.keys(project.features);
+    if (context.obj.features) {
+      const featureKeys = Object.keys(context.obj.features);
 
       for (let i = 0; i < featureKeys.length; i++) {
         const featureKey = featureKeys[i];
 
-        const featureResults = await context.validateObject(
-          'features',
-          featureKey,
-          project.features[featureKey],
-          `$.features.['${featureKey}']`);
+        const featureContext = context.child(context.obj.features[featureKey], `features['${featureKey}']`, 'feature', featureKey);
+
+        const featureResults = await featureContext.validate();
 
         results = results.concat(featureResults);
       }
     }
 
     // dependencies
-    if (project.dependencies) {
-      const projectNames = Object.keys(project.dependencies);
+    if (context.obj.dependencies) {
+      const projectNames = Object.keys(context.obj.dependencies);
 
       for (let i = 0; i < projectNames.length; i++) {
         const projectName = projectNames[i];
@@ -30,20 +28,21 @@ async function validate(project, context) {
         if (dependencyProject == null) {
           results = results.concat([
             {
-              path: `$.dependencies.['${projectName}']`,
+              path: `${context.jsonPath}.dependencies['${projectName}']`,
               message: 'Project not found'
             }
           ]);
         } else {
-          const featureDependencies = project.dependencies[projectName];
+          const dependencies = context.obj.dependencies[projectName];
 
-          const featureNames = Object.keys(featureDependencies);
+          const dependencyNames = Object.keys(dependencies);
 
-          for (let j = 0; j < featureNames.length; j++) {
-            const featureName = featureNames[j];
-            const featureDependency = featureDependencies[featureName];
+          for (let j = 0; j < dependencyNames.length; j++) {
+            const dependencyName = dependencyNames[j];
+            const dependency = dependencies[dependencyName];
+            const dependencyContext = context.child(dependency, `dependencies['${projectName}']['${dependencyName}']`, 'dependency', dependencyName);
 
-            const featureResults = await context.validateObject('dependencies', featureName, featureDependency, `$.dependencies.['${projectName}'].['${featureName}']`);
+            const featureResults = await dependencyContext.validate();
 
             results = results.concat(featureResults);
           }
@@ -55,8 +54,9 @@ async function validate(project, context) {
   return results;
 }
 
-module.exports.projects = {
+module.exports.project = {
   default: {
-    validate: validate
+    validate: validate,
+    hello: 'world'
   }
 }

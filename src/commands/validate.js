@@ -12,7 +12,7 @@ module.exports.run = async function(args, context) {
   let results;
 
   try {
-    results = await context.validateObject('projects', context.project.type, context.project);
+    results = await context.validate();
   } catch (error) {
     cli.outputObject(error, args);
   }

@@ -21,6 +21,10 @@ properties:
         description: |
           Kabob-cased organization that owns the project. May have multiple levels separated by slashes.
         pattern: ^(?:[a-z0-9]+(?:-[a-z0-9]+)*)(?:/[a-z0-9]+(?:-[a-z0-9]+)*)*$
+      owners:
+        type: array
+        items:
+          type: string
     required:
       - name
 required:

@@ -1,8 +1,8 @@
-async function validate(obj, context) {
-  return await context.validateSchema(obj, `${__dirname}/feature-schema.yaml`);
+async function validate(context) {
+  return await context.validateSchema(`${__dirname}/feature-schema.yaml`);
 }
 
-module.exports.features = {
+module.exports.feature = {
   default: {
     validate: validate
   }

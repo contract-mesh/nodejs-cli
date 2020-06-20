@@ -109,3 +109,5 @@ dist
 # TypeScript
 *.js
 *.js.map
+dist/
+!gulpfile.js

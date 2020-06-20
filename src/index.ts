@@ -1,3 +1,3 @@
-import * as cli from "./src/cli";
+import * as cli from "./cli";
 
 cli.run('root').catch(err => console.error(err));

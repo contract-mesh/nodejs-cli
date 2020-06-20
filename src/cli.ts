@@ -6,7 +6,7 @@ import { highlight } from 'cli-highlight';
 
 export async function run(commandName: string, context: ContractContext = null, argv: any = null) {
   // Parse args
-  const docoptPath = `${__dirname}/../contracts/${commandName}.docopt`;
+  const docoptPath = `${__dirname}/contracts/${commandName}.docopt`;
   const spec = await fs.readFile(docoptPath, {encoding: 'utf-8'});
   const args = neodoc.run(spec, {argv: argv, optionsFirst: spec.match(/\<command\>/g) != null, smartOptions: true});
 

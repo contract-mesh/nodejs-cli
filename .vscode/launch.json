@@ -11,10 +11,12 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/index.ts",
-      "preLaunchTask": "tsc: build - tsconfig.json",
+      "program": "${workspaceFolder}/src/index.ts",
+      "preLaunchTask": "gulp: default",
+      "sourceMaps": true,
+      "smartStep": true,
       "args": ["validate", "-f", "yaml"],
-      "outFiles": ["${workspaceFolder}/**/*.js"]
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
     }
   ]
 }

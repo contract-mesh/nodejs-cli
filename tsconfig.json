@@ -2,10 +2,12 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "ES5",
-    "sourceMap": true
+    "sourceMap": true,
+    "outDir": "dist",
+    "sourceRoot": "src",
+    "moduleResolution": "node"
   },
   "include": [
-    "src/**/*.ts",
-    "index.ts"
+    "src/**/*.ts"
   ]
 }
